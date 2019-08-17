@@ -1,0 +1,94 @@
+<!-- last modified:8/16/2019
+Author:Daniel Delannes-Molka
+Addtional modifications by: -->
+<!-- index.html testbed for WAsystem -->
+<!-- NOTE: WA stands for Without Acronyme please find a better name-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>test system</title>
+    <h1>test system</h1>
+    <script src="WASystem.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+  </head>
+  <body>
+    <div id="WASystem"></div>
+    <script type="text/javascript">
+    // Decision Theory module set
+    var fun1 = function(location,data){
+        console.log("running runNormalizationModule");
+        return runNormalizationModule(location,data);
+    };
+    var module1 = {
+        inputInstructions:["Data Set To Normalize"],
+        moduleFunction:fun1,
+        moduleName:"NormalizationModule",
+        scripts:[""]
+    };
+    var fun2 = function(location,data){
+      console.log("running DecisionTheoryModule");
+      return runDecisionTheoryModule(location,data);
+    };
+    var module2 = {
+      inputInstructions:["Main Data Set"],
+      moduleFunction:fun2,
+      moduleName:"DecisionTheoryModule",
+      scripts:["forceDirectedGraphFactory"]
+    };
+    createSystem("WASystem",900,900,1,2,[module1,module2]);
+    // Volcano Plot Module set
+      // var fun1 = function(location,data){
+      //   console.log("running basicAveragingModule");
+      //   return runDescriptorScalingModule(location,data);
+      // };
+      // var module1 = {
+      //   inputInstructions:["Data Set To Assimilate","Main Data Set"],
+      //   moduleFunction:fun1,
+      //   moduleName:"DescriptorScalingModule",
+      //   scripts:[""]
+      // };
+      // var fun2 = function(location,data){
+      //   console.log("running runNormalizationModule");
+      //   return runNormalizationModule(location,data);
+      // };
+      // var module2 = {
+      //   inputInstructions:["Data Set To Normalize"],
+      //   moduleFunction:fun2,
+      //   moduleName:"NormalizationModule",
+      //   scripts:[""]
+      // };
+      // var fun3 = function(location,data){
+      //   console.log("running VolcanoPlotModule");
+      //   return runVolcanoPlotModule(location,data);
+      // };
+      // var module3 = {
+      //   inputInstructions:["Data Set To Run Anaysis on"],
+      //   moduleFunction:fun3,
+      //   moduleName:"VolcanoPlotModule",
+      //   scripts:["isomap","matrixManipulationLibary"]
+      // };
+      // var fun4 = function(location,data){
+      //   console.log("running LinearRegressionAnalysisModule");
+      //   return runLinearRegressionAnalysisModule(location,data);
+      // };
+      // var module4 = {
+      //   inputInstructions:["X matrix","Y matrix Options"],
+      //   moduleFunction:fun4,
+      //   moduleName:"LinearRegressionAnalysisModule",
+      //   scripts:[""]
+      // };
+      // createSystem("WASystem",900,900,2,2,[module1,module2,module3,module4]);
+      // Feature Classification Module set
+      // var module4 = {
+      //   inputInstructions:["insert dataset with properties EutecticComp,EutecticAngle,Radius1 and Radius2"],
+      //   moduleFunction:function(location,data){
+      //     runFeatureClassificationModule(location,data);
+      //   },
+      //   moduleName:"FeatureClassificationModule",
+      //   scripts:[""]
+      // };
+      // createSystem("WASystem",900,900,1,1,[module4]);
+    </script>
+  </body>
+</html>

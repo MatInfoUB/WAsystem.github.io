@@ -1,0 +1,51 @@
+<!-- last modified:8/16/2019
+ Author:Daniel Delannes-Molka
+ Addtional modifications by: -->
+ <!-- NOTE: WA stands for Without Acronyme please find a better name-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>test system</title>
+    <h1>test system</h1>
+    <script src="WASystem.js"></script>
+  </head>
+  <body>
+    <!-- this div is where the system will be put -->
+    <div id="WASystem"></div>
+    <!-- this script element runs the system -->
+    <script type="text/javascript">
+      // this is the object specifications for module1:
+      // inputInstructions: Array of instructions for each input
+      // moduleFunction: function that calls the module
+      // moduleName: name of the module
+      // scripts: names of additional scripts in the module folder that needs to
+      // be called for the module to function.
+      var module1 = {
+        inputInstructions:["input1"],
+        moduleFunction:function(location,data){
+          return runModuleTemplate1Module(location,data);
+        },
+        moduleName:"ModuleTemplate1",
+        scripts:[""]
+      };
+      // this is the object specifications for module2
+      var module2 = {
+        inputInstructions:["input1"],
+        moduleFunction:function(location,data){
+          return runModuleTemplate2Module(location,data);
+        },
+        moduleName:"ModuleTemplate2",
+        scripts:[""]
+      };
+      // Creates the WAsystem with size of 1200x600px and a 1x2 cells with module 1 and 2
+      createSystem("WASystem",1200,600,1,2,[module1,module2]);
+      // Creates the WAsystem with size of 600x1200px and a 2x1 cells with module 1 and 2
+      // createSystem("WASystem",600,1200,2,1,[module1,module2]);
+      // Creates the WAsystem with size of 900x900px and a 1x1 cell with module1
+      // createSystem("WASystem",900,900,1,1,[module1]);
+      // Creates the WAsystem with size of 900x900px and a 1x1 cell with module2
+      // createSystem("WASystem",900,900,1,1,[module2]);
+    </script>
+  </body>
+</html>
