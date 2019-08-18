@@ -2,9 +2,10 @@
 // Author:Daniel Delannes-Molka
 // Addtional modifications by:----
 //Takes in data and location and creates input textboxes of all the data columns
-//the user must add waights and click submit. It will then use a weighted
-//decision tree and create and display a force directed diagram of the results.
-//The imput data must have a labels column.
+//the user must add waights, the more important the property, the bigger the
+// weight and click submit. It will then use a weighted decision tree and create
+// and display a force directed diagram of the results.
+//The input data must have a labels column.
 function runDecisionTheoryModule(location,inputData){
   var graphData={"links":[],"nodes":[]};
   var data=[];
@@ -16,18 +17,6 @@ function runDecisionTheoryModule(location,inputData){
     createForceDirectedGraph(graphData,"graph"+location.parentElement.moduleNumber);
   }
   function processData(){
-    // var lowFill = 0;
-    // listOfPriority.forEach(function(e){
-    //   if(Number.isNaN(e)==false && e>lowFill){
-    //     lowFill=e;
-    //   }
-    // });
-    // var lowFill = lowFill+1;
-    // for(var i=0;i<listOfPriority.length;i++){
-    //   if(Number.isNaN(listOfPriority[i])==true){
-    //     listOfPriority[i]=lowFill;
-    //   }
-    // }
     var elements = Object.keys(data);
     if(listOfPriority.length>1){
       for(var i = 0;i<elements.length;i++){
@@ -139,6 +128,7 @@ function runDecisionTheoryModule(location,inputData){
     }else{
       return 0;
     }
+    // priority comparison method
     // var cType =typeof c;
     // if(cType==='number'){
     //   c = math.matrix([[c]]);
@@ -182,16 +172,6 @@ function runDecisionTheoryModule(location,inputData){
     }
     return retVal;
   }
-  //check if lik already exist
-  function isDuplicate(link){
-    var retVal = false;
-    graphData["links"].forEach(function(j, index, object){
-      if(j["source"] === link["source"] && j["target"] === link["target"]){
-        retVal = true;
-      }
-    });
-    return retVal;
-  }
 
   function addForm(){
     var div = document.createElement("div");
@@ -207,7 +187,6 @@ function runDecisionTheoryModule(location,inputData){
       var l1 = document.createElement("div");
       l1.innerHTML = e+":";
       l1.class="column";
-      // l1.style.width =(100/(keys.length+1))/2+"%";
       l1.style.width="100%";
       l1.style.height ="100%";
       l1.style["white-space"] = "nowrap";
@@ -216,8 +195,6 @@ function runDecisionTheoryModule(location,inputData){
       var e1 = document.createElement("input");
       e1.type = "text";
       e1.class = "formInput"
-      // e1.style.width =(100/(keys.length+1))/2+"%";
-      // e1.style.height ="100%";
       e1.style.width="100%";
       e1.class="column";
       div.appendChild(e1);
@@ -237,10 +214,21 @@ function runDecisionTheoryModule(location,inputData){
     var listOfInputs = location.getElementsByTagName("input");
     listOfPriority=[]
     for(var i = 0;i<listOfInputs.length;i++){
-      listOfPriority.push(parseFloat(listOfInputs[i].value, 10));
+      if(listOfInputs[i].value ===""){
+        listOfPriority.push(0);
+      }else{
+        listOfPriority.push(parseFloat(listOfInputs[i].value, 10));
+      }
     }
     processData();
     createGraph();
+    var listOfLinks = [];
+    graphData.links.forEach(function(i){
+       listOfLinks.push([i.source.name,i.target.name]);
+    });
+    var result = {data:convertToCsv(["source","target"],listOfLinks),
+                name:moduleArray[location.parentElement.moduleNumber].moduleName+".csv"};
+    createDataSlot(result);
   }
   // extractData();
   var dataSet = math.clone(inputData[0]);
@@ -260,4 +248,5 @@ function runDecisionTheoryModule(location,inputData){
   svg.setAttribute('height', heightOfParent);
   svg.id = "graph"+location.parentElement.moduleNumber;
   location.appendChild(svg);
+  return null;
 }

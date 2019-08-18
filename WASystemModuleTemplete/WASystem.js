@@ -112,6 +112,9 @@ function createSystem(location,width,height,numberOfRows,numberOfColumns,listOfM
   script = document.createElement("script");
   script.src = "https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js";
   document.head.appendChild(script);
+  var script = document.createElement("script");
+  script.src = "matrixManipulationLibary.js";
+  document.head.appendChild(script);
   //set up grid layout
   var parentNode = document.getElementById(location);
   // set up input interface
